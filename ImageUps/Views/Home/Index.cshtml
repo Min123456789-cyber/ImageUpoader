@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Image>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <div class="card shadow">
+        <div class="card-header">
+            <div class="bg-dark rounded">
+                <h1 class="text-white text-center p-3 text-decoration-none">List of Memories</h1>
+            </div>
+            <div>
+                <a class="btn btn-dark align-items-end" asp-controller="Home" asp-action="Create"><i class=" bi bi-plus"></i>Create Memory</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                @foreach (var img in Model.OrderByDescending(u => u.Id))
+                {
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <center>
+                            <div class="card m-3 shadow hover" style="width: 18rem;">
+                                <img src="~/images/@img.ImageUrl" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">@img.Title</h5>
+                                    <div class="grid gap-2">
+                                        <a asp-action="Details" asp-route-id="@img.Id" class="btn btn-dark mx-auto">Detail</a>
+                                        <a asp-action="Update" asp-route-id="@img.Id" class="btn btn-info mx-auto">Update</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
